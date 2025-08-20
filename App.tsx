@@ -1,20 +1,24 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import React from "react";
+import { SafeAreaView, StyleSheet } from "react-native";
+import { WebView } from "react-native-webview";
 
 export default function App() {
   return (
-    <View style={styles.container}>
-      <Text>Open up App.tsx to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <SafeAreaView style={styles.container}>
+      <WebView
+        source={{ uri: "http://172.30.1.31:3000" }} // 👉 Next.js 서버 주소
+        style={styles.webview}
+        startInLoadingState={true}
+        javaScriptEnabled
+        domStorageEnabled
+        onLoadStart={() => console.log("웹뷰 로딩 시작")}
+        onLoadEnd={() => console.log("웹뷰 로딩 완료")}
+      />
+    </SafeAreaView>
   );
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
+  container: { flex: 1 },
+  webview: { flex: 1 },
 });
